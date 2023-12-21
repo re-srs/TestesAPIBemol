@@ -28,7 +28,7 @@ public class UsuarioSteps {
     ValidatableResponse validatableResponse;
 
     String url = "https://serverest.dev/usuarios";
-    String url_lista_usuario = "";
+    String url_lista_usuario = "https://serverest.dev/usuarios?_id="+id;
 
 
     //correto seria criar uma classe apartada, mas não consegui dar um extends na classe, aí fiz assim mesmo,
@@ -79,11 +79,8 @@ public class UsuarioSteps {
 
         mensagem = validatableResponse.extract().path("message");
         statusCode = validatableResponse.extract().statusCode();
-        id = validatableResponse.extract().path("_id");
+ ;      id = validatableResponse.extract().path("_id");
 
-
-        //System.out.println(id);
-        //System.out.println(mensagem);
     }
     @Então("valido a mensagem de sucesso da criação do usuario")
     public void valido_a_mensagem_de_sucesso_da_criação_do_usuario() {
@@ -94,15 +91,14 @@ public class UsuarioSteps {
 
     @Dado("que desejo consultar um usuario com sucesso passando ID")
     public void que_desejo_consultar_um_usuario_com_sucesso_passando_id() {
-        url_lista_usuario = "https://serverest.dev/usuarios?_id=YkBxcVa0VTg5wl3i";
-       get(url_lista_usuario);
-        //System.out.println(url_lista_usuario);
 
-
+        get(url_lista_usuario);
 
     }
     @Quando("envio a solicitação para listar um usuario")
     public void envio_a_solicitação_para_listar_um_usuario() {
+        url_lista_usuario = "https://serverest.dev/usuarios?_id=3wd4SivWFSjrCXNV";
+
         validatableResponse =
                 given()
                         .log().all()
